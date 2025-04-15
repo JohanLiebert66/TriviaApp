@@ -1,6 +1,7 @@
 package com.example.jettrivia.di
 
 import com.example.jettrivia.network.QuestionApi
+import com.example.jettrivia.repository.QuestionRepository
 import com.example.jettrivia.util.Constants.BASE_URL
 import dagger.Module
 import dagger.Provides
@@ -13,6 +14,10 @@ import javax.inject.Singleton
 @Module
 @InstallIn( SingletonComponent::class)
 object AppModule {
+    @Singleton
+    @Provides
+    fun provideQuestionRepository(api: QuestionApi) = QuestionRepository(api)
+
     @Singleton
     @Provides   // Add all the providers or dependencies you want to inject [ DAO, Repository, Retrofit Instantiation ]
     fun provideQuestionApi(): QuestionApi {
